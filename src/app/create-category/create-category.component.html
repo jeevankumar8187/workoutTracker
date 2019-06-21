@@ -1,0 +1,52 @@
+<div style="width:600px; ">
+    <div class="card-body">
+        <div>
+            <form class="form-inline my-2 my-lg-0" (ngSubmit)="findByCategory()">
+                <input list = "optionCategories" [(ngModel)]="text" name = "text"class="form-control mr-sm-2" style="width: 80%" type="text" placeholder="Search"> 
+                <datalist id="optionCategories">
+                    <span *ngFor = "let category of optionCategories">
+                        <option value={{category.categoryName}}></option>
+                    </span>
+                </datalist>
+                  <input  class="btn btn-primary" style="margin-left: 10px" type="submit" >
+            </form>
+        </div>
+      <br />
+      <br />
+      <form (ngSubmit)="addCategory()">
+        <div class="form-group row">
+  
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="add" name="category" placeholder="Add Category"
+              [(ngModel)]=categoryName name="categoryName">
+          </div>
+          <div class="col-sm-3">
+            <button type="submit" class="btn btn-primary" [disabled]="status">Add</button>
+            <button type="button" class="btn btn-primary" id="update" disabled style="margin-left: 5px"
+                   (click)="updateCategory()">update</button>
+  
+          </div>
+        </div>
+        <div style="width:500px; background-color: lavender">
+          <div *ngFor="let category of categories">
+            <div class="form-group row" style=" background-color:rgb(201, 245, 188);width: 515px;">
+              <div class="col-sm-5">
+                <div style=" padding: 4px;">
+                  <div>{{category.categoryName}}</div>
+                </div>
+              </div>
+              <div style="float:right; position: absolute; right: 70%;">
+                <button type="button" class="btn btn-primary" #edit name="{{category._id}}"
+                        (click)="editCategory(edit.name)"
+                        style="font-size: 10px; background-color:olivedrab; border: olivedrab; margin-right: 6px">Edit</button>
+                <button type="button" class="btn btn-primary" #delete name="{{category._id}}"
+                  (click)="deleteCategory(category)"
+                  style=" font-size: 10px; background-color:olivedrab; border: olivedrab; margin-right: 6px">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  
+  </div>

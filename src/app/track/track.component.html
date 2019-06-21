@@ -1,0 +1,311 @@
+<!-- Select date: <input type="date" #date (change)="getDate()"  name ="date" ([ngModel])="date.date" /> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<mat-tab-group (selectedIndexChange)="report($event)">
+  <mat-tab label="Today"  >
+    <div *ngIf="show" class="container">
+      <table class="table table-hover" style="background-color: white">
+        <thead style="font-size: 15px;">
+          <td><b>Workout Title</b></td>
+          <td><b>Start Date</b></td>
+          <td><b>Start Time</b></td>
+          <td><b>End Date</b></td>
+          <td><b>End Time</b></td>
+          <td><b>Calories Burnt</b></td>
+        </thead>
+        <tr *ngFor="let out of output">
+          <td>{{out.workoutTitle}}</td>
+          <td>
+            <span *ngFor="let info of out.info">
+              <span *ngIf="(info.status && (info.startDate == today))">
+                {{info.startDate}}<br />
+              </span>
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let info of out.info">
+              <span *ngIf="(info.status && (info.startDate == today))">
+                {{timeFormat(info.startTime)}}<br />
+              </span>
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let info of out.info">
+              <span *ngIf="(info.status && (info.startDate == today))">
+                {{info.endDate}}<br />
+              </span>
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let info of out.info">
+              <span *ngIf="(info.status && (info.startDate == today))">
+                {{timeFormat(info.endTime)}}<br />
+              </span>
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let info of out.info">
+              <span *ngIf="(info.status && (info.startDate == today) && check) || (info.status && !check)">
+                {{info.caloriesBurntPerDay}} Calories<br />
+              </span>
+            </span>
+          </td>
+        </tr>
+        <tr style="font-size: 15px">
+          <td><b>Total Calories burnt</b></td>
+          <td colspan="4"></td>
+          <td><b>{{totalCalories | number}} Calories</b></td>
+        </tr>
+      </table>
+    </div>
+  </mat-tab>
+  <mat-tab label="This Week">
+      <div *ngIf="show" class="container">
+          <table class="table table-hover" style="background-color: white">
+            <thead style="font-size: 15px;">
+              <td><b>Workout Title</b></td>
+              <td><b>Start Date</b></td>
+              <td><b>Start Time</b></td>
+              <td><b>End Date</b></td>
+              <td><b>End Time</b></td>
+              <td><b>Calories Burnt</b></td>
+            </thead>
+            <tr *ngFor="let out of output">
+                <td>{{out.workoutTitle}}</td>
+                <td>
+                  <span *ngFor="let info of out.info">
+                    <span *ngIf="(info.status && (info.startDate >= today))">
+                      {{info.startDate}}<br />
+                    </span>
+                  </span>
+                </td>
+                <td>
+                  <span *ngFor="let info of out.info">
+                    <span *ngIf="(info.status && (info.startDate >= today))">
+                      {{timeFormat(info.startTime)}}<br />
+                    </span>
+                  </span>
+                </td>
+                <td>
+                  <span *ngFor="let info of out.info">
+                    <span *ngIf="(info.status && (info.startDate >= today))">
+                      {{info.endDate}}<br />
+                    </span>
+                  </span>
+                </td>
+                <td>
+                  <span *ngFor="let info of out.info">
+                    <span *ngIf="(info.status && (info.startDate >= today))">
+                      {{timeFormat(info.endTime)}}<br />
+                    </span>
+                  </span>
+                </td>
+                <td>
+                  <span *ngFor="let info of out.info">
+                    <span *ngIf="(info.status && (info.startDate >= today))">
+                      {{info.caloriesBurntPerDay}} Calories<br />
+                    </span>
+                  </span>
+                </td>
+              </tr>
+            <tr style="font-size: 15px">
+              <td><b>Total Calories burnt</b></td>
+              <td colspan="4"></td>
+              <td><b>{{totalCalories | number}} Calories</b></td>
+            </tr>
+          </table>
+        </div>
+  </mat-tab>
+  <mat-tab label="This Month">
+      <div *ngIf="show" class="container">
+          <table class="table table-hover" style="background-color: white">
+            <thead style="font-size: 15px;">
+              <td><b>Workout Title</b></td>
+              <td><b>Start Date</b></td>
+              <td><b>Start Time</b></td>
+              <td><b>End Date</b></td>
+              <td><b>End Time</b></td>
+              <td><b>Calories Burnt</b></td>
+            </thead>
+            <tr *ngFor="let out of output">
+                <td>{{out.workoutTitle}}</td>
+                <td>
+                  <span *ngFor="let info of out.info">
+                    <span *ngIf="(info.status && (info.startDate >= today))">
+                      {{info.startDate}}<br />
+                    </span>
+                  </span>
+                </td>
+                <td>
+                  <span *ngFor="let info of out.info">
+                    <span *ngIf="(info.status && (info.startDate >= today))">
+                      {{timeFormat(info.startTime)}}<br />
+                    </span>
+                  </span>
+                </td>
+                <td>
+                  <span *ngFor="let info of out.info">
+                    <span *ngIf="(info.status && (info.startDate >= today))">
+                      {{info.endDate}}<br />
+                    </span>
+                  </span>
+                </td>
+                <td>
+                  <span *ngFor="let info of out.info">
+                    <span *ngIf="(info.status && (info.startDate >= today))">
+                      {{timeFormat(info.endTime)}}<br />
+                    </span>
+                  </span>
+                </td>
+                <td>
+                  <span *ngFor="let info of out.info">
+                    <span *ngIf="(info.status && (info.startDate >= today))">
+                      {{info.caloriesBurntPerDay}} Calories<br />
+                    </span>
+                  </span>
+                </td>
+              </tr>
+            <tr style="font-size: 15px">
+              <td><b>Total Calories burnt</b></td>
+              <td colspan="4"></td>
+              <td><b>{{totalCalories | number}} Calories</b></td>
+            </tr>
+          </table>
+        </div>
+  </mat-tab>
+</mat-tab-group>
+<ng-marquee *ngIf="!show" duration="10" style="color: white; position: absolute; right: 40%; left: 20%; top:20%">
+  <h3 *ngIf="!show"> No Workouts done on selected Date</h3>
+</ng-marquee>
+  <!-- <div *ngIf="show" class="container">
+    <table class="table table-hover" style="background-color: white">
+      <thead style="font-size: 15px;">
+        <td><b>Workout Title</b></td>
+        <td><b>Start Date</b></td>
+        <td><b>Start Time</b></td>
+        <td><b>End Date</b></td>
+        <td><b>End Time</b></td>
+        <td><b>Calories Burnt</b></td>
+      </thead>
+      <tr *ngFor="let out of output">
+        <td>{{out.workoutTitle}}</td>
+        <td>
+          <span *ngFor="let info of out.info">
+            <span *ngIf="(info.status && (info.startDate == date.value) && check) || (info.status && !check)">
+              {{info.startDate}}<br />
+            </span>
+          </span>
+        </td>
+        <td>
+          <span *ngFor="let info of out.info">
+            <span *ngIf="(info.status && (info.startDate == date.value) && check) || (info.status && !check)">
+              {{timeFormat(info.startTime)}}<br />
+            </span>
+          </span>
+        </td>
+        <td>
+          <span *ngFor="let info of out.info">
+            <span *ngIf="(info.status && (info.startDate == date.value) && check) || (info.status && !check)">
+              {{info.endDate}}<br />
+            </span>
+          </span>
+        </td>
+        <td>
+          <span *ngFor="let info of out.info">
+            <span *ngIf="(info.status && (info.startDate == date.value) && check) || (info.status && !check)">
+              {{timeFormat(info.endTime)}}<br />
+            </span>
+          </span>
+        </td>
+        <td>
+          <span *ngFor="let info of out.info">
+            <span *ngIf="(info.status && (info.startDate == date.value) && check) || (info.status && !check)">
+              {{info.caloriesBurntPerDay}} Calories<br />
+            </span>
+          </span>
+        </td>
+      </tr>
+      <tr style="font-size: 15px">
+        <td><b>Total Calories burnt</b></td>
+        <td colspan="4"></td>
+        <td><b>{{totalCalories}} Calories</b></td>
+      </tr>
+    </table>
+  </div>
+
+ -->
+
+
+
+<!-- <div *ngIf="show" class="container">
+  <table class="table table-hover" style="background-color: white">
+    <thead style="font-size: 15px;">
+      <td><b>Workout Title</b></td>
+      <td><b>Start Date</b></td>
+      <td><b>Start Time</b></td>
+      <td><b>End Date</b></td>
+      <td><b>End Time</b></td>
+      <td><b>Calories Burnt</b></td>
+    </thead>
+    <tr *ngFor="let out of output">
+      <td>{{out.workoutTitle}}</td>
+      <td>
+        <span *ngFor="let info of out.info">
+          <span *ngIf="info.status && (info.startDate == date.value) && check ">
+            <span *ngIf="info.status && !check">
+            {{info.startDate}}<br />
+          </span>
+          </span>
+        </span>
+      </td>
+      <td>
+        <span *ngFor="let info of out.info">
+          <span *ngIf="info.status && (info.startDate == date.value) ">
+            {{timeFormat(info.startTime)}}<br />
+          </span>
+        </span>
+      </td>
+      <td>
+        <span *ngFor="let info of out.info">
+          <span *ngIf="info.status && (info.startDate == date.value) ">
+            {{info.endDate}}<br />
+          </span>
+        </span>
+      </td>
+      <td>
+        <span *ngFor="let info of out.info">
+          <span *ngIf="info.status && (info.startDate == date.value) ">
+            {{timeFormat(info.endTime)}}<br />
+          </span>
+        </span>
+      </td>
+      <td>
+        <span *ngFor="let info of out.info">
+          <span *ngIf="info.status && (info.startDate == date.value) ">
+            {{info.caloriesBurntPerDay}} Calories<br />
+          </span>
+        </span>
+      </td>
+    </tr>
+    <tr style="font-size: 15px">
+      <td><b>Total Calories burnt</b></td>
+      <td colspan="4"></td>
+      <td><b>{{totalCalories}} Calories</b></td>
+    </tr>
+  </table>
+</div> -->
+
+
+
+<!-- <h4 style="color: white">{{out.workoutTitle}}</h4>
+  <div *ngFor="let info of out.info">
+    <h3 *ngIf="info.status">
+      {{info.startDate}}
+      {{info.startTime}}
+      {{info.enddate}}
+      {{info.endTime}}
+    </h3>
+  </div> -->
+
+<!-- <input type="text" name="output.workoutTitle" [value]="output.workoutTitle" ([ngModel])="output.workoutTitle"/> -->

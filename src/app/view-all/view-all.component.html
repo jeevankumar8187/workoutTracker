@@ -1,0 +1,63 @@
+
+<div class="card w-50" >
+    <div class="card-body">
+        <div>
+            <form class="form-inline my-2 my-lg-0" (ngSubmit)="findByWorkout()">
+                <input list="optionalWorkouts" [(ngModel)]="text" name="text" class="form-control mr-sm-2"
+                    style="width: 40%" type="text" placeholder="Search">
+                <datalist id="optionalWorkouts">
+                    <span *ngFor="let workout of workouts">
+                        <option value={{workout.workoutTitle}}></option>
+                    </span>
+                </datalist>
+                <input class="btn btn-primary"  style="margin-left: 10px;" type="submit">
+            </form>
+        </div>
+        <span *ngIf ="!search">
+            <div *ngFor="let workout of workouts">
+                <br />
+                <div style="width:500px;  padding: 4px; text-align: center; border: darkslategrey solid; background-color:cornsilk">
+                    <b>{{workout.workoutTitle}} <br /></b>
+                    <br />
+                    <button class="btn btn-primary" #edit name="{{workout.id}}"
+                        style="font-size: 10px; background-color:darkslategrey; border: darkslategrey; margin-right: 6px; margin-right: 6px" 
+                        [routerLink]="['edit/workout',edit.name]" >Edit</button>
+                    <button class="btn btn-primary" #delete name="{{workout.id}}"
+                        style=" font-size: 10px; background-color:darkslategrey; border: darkslategrey; margin-right: 6px; margin-right: 6px"
+                        (click)="deleteWorkout(delete.name)">Delete</button>
+                    <button class="btn btn-primary"
+                        style=" font-size: 10px; background-color:darkslategrey; border: darkslategrey; margin-right: 6px; margin-right: 6px"
+                        [routerLink]="['start/workout',start.name]" (click)="updateStart(start.name)" #start name="{{workout.id}}">Start</button>
+                    <button class="btn btn-primary" #end name="{{workout.id}}"
+                        style=" font-size: 10px; background-color:darkslategrey; border: darkslategrey; margin-right: 6px; margin-right: 6px"
+                        [routerLink]="['end/workout',end.name]" (click)="updateEnd(end.name)" >End</button>
+                    <br />
+                </div>
+            </div>
+        </span>
+        <span *ngIf="search">
+            <div *ngFor="let workout of optionalWorkouts;let i = index">
+                <br />
+                <div style="width:500px;  padding: 4px; text-align: center; border: darkslategrey solid; background-color:cornsilk">
+                    <b>{{workout.workoutTitle}} <br /></b>
+                    <br />
+                    <button class="btn btn-primary" #edit name="{{workout.id}}"
+                        style="font-size: 10px; background-color:darkslategrey; border: darkslategrey; margin-right: 6px; margin-right: 6px"
+                        [routerLink]="['edit/workout',workout.id]">Edit</button>
+                    <button class="btn btn-primary" #delete name="{{workout.id}}"
+                        style=" font-size: 10px; background-color:darkslategrey; border: darkslategrey; margin-right: 6px; margin-right: 6px"
+                        (click)="deleteWorkout(delete.name)">Delete</button>
+                    <button class="btn btn-primary"
+                        style=" font-size: 10px; background-color:darkslategrey; border: darkslategrey; margin-right: 6px; margin-right: 6px"
+                        [routerLink]="['start/workout',start.name]" #start name="{{workout.id}}"
+                        (click)="show(workout.id,i)" disabled="show">Start</button>
+                    <button class="btn btn-primary" #end name="{{workout.id}}"
+                        style=" font-size: 10px; background-color:darkslategrey; border: darkslategrey; margin-right: 6px; margin-right: 6px"
+                        [routerLink]="['end/workout',end.name]"  disabled="!show">End</button>
+                    <br />
+                </div>
+            </div>
+        </span>
+    </div>
+
+</div>

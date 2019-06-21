@@ -1,0 +1,7 @@
+{
+    "/id/{id}": {
+        "target": "http://localhost:8095/api/v1/workout/id/",
+        "secure": "false",
+        "changeOrigin": true
+    }
+}

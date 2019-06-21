@@ -1,0 +1,38 @@
+
+<form #myForm="ngForm">
+  <div class="card w-50" >
+    <div class="card-body">
+      <!-- <h5 class="card-title text-center">Edit Workout {{workoutTitle}}</h5> -->
+      <!-- <div class="form-group row">
+        <label for="Title" class="col-sm-2">Title:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" [(ngModel)]= "workoutTitle" name = "workoutTitle"id="Title" placeholder="Title" disabled>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="Note" class="col-sm-2">Note:</label>
+        <div class="col-sm-5">
+          <textarea rows="4" cols="50" id="Note" [(ngModel)]= "workoutNote" name = "workoutNote"  placeholder="Note"></textarea>
+        </div>
+      </div> -->
+      <div class="form-group row">
+        <label for="date" class="col-sm-2"  style="color: white;font-size:20px; font-family:'Times New Roman'">Start Date:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" [(ngModel)]= "startDate" name = "startDate"id="date" value="{{date}}"  disabled>
+        </div>
+        
+      </div>
+      <div class="form-group row">
+        <label for="time" class="col-sm-2" style="color: white;font-size:20px; font-family:'Times New Roman'">Start Time:</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" [(ngModel)]= "startTime" name = "startTime"id="time" disabled>
+        </div>
+      </div>
+      <br />
+      <div class="form-group row">
+        <!-- <button type = "button"style="margin-left:240px" class="btn btn-primary" (click)="updateStart()" routerLink="/viewall">Start</button> -->
+        <button type = "button" class="btn btn-primary" style="margin-left: 20px" routerLink="/viewall">Cancel</button>
+      </div>
+    </div>
+  </div>
+</form>
